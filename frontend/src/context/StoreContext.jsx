@@ -6,7 +6,7 @@ export const StoreContext = createContext({});
 
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:4000"; // Ensure backend is running on this port
+    const url = "http://localhost:5002"; // Ensure backend is running on this port
     const [token, setToken] = useState("");
     const [medicine_list, setMedicineList] = useState([]);
 
@@ -43,7 +43,6 @@ const StoreContextProvider = (props) => {
     // Get total cart amount (with safety check)
     const getTotalCartAmount = () => {
         if (!medicine_list || medicine_list.length === 0) {
-            console.warn("Medicine list is empty, returning total cart amount as 0.");
             return 0;
         }
 
@@ -62,7 +61,7 @@ const StoreContextProvider = (props) => {
     // Fetch medicine list (ensuring valid data)
     const fetchMedicineList = async () => {
         try {
-            const response = await axios.get(url + "/api/medicine/list");
+            const response = await axios.get(url + "/api/medicines/list");
             if (response.data && response.data.data) {
                 setMedicineList(response.data.data);
             } else {

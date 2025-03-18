@@ -6,9 +6,6 @@ import MedicineItem from "../MedicineItem/MedicineItem";
 const MedicineDisplay = ({ category }) => {
   const { medicine_list } = useContext(StoreContext);
 
-  // Debugging: Check if medicine_list is received correctly
-  console.log("Medicine List:", medicine_list);
-
   // Prevent .map() error by checking if medicine_list exists
   if (!medicine_list || medicine_list.length === 0) {
       return <p>Loading medicines...</p>;
