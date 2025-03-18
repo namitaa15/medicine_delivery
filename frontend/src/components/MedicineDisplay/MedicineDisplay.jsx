@@ -1,21 +1,28 @@
-import React, { useContext } from 'react';
-import './MedicineDisplay.css'; // Linking CSS for the layout and styling
-import { StoreContext } from '../../context/StoreContext'; // Accessing the global context
+import React, { useContext } from "react";
+import "./MedicineDisplay.css";
+import { StoreContext } from "../../context/StoreContext";
 import MedicineItem from "../MedicineItem/MedicineItem";
 
-
 const MedicineDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext); // Using context to get the list of medicines
-  
+  const { medicine_list } = useContext(StoreContext);
+
+  // Debugging: Check if medicine_list is received correctly
+  console.log("Medicine List:", medicine_list);
+
+  // Prevent .map() error by checking if medicine_list exists
+  if (!medicine_list || medicine_list.length === 0) {
+      return <p>Loading medicines...</p>;
+  }
+
   return (
     <div className="medicine-display" id="medicine-display">
-      <h2 className="h2we">Top medicines near you</h2> {/* Heading for the medicines section */}
+      <h2 className="h2we">Top medicines near you</h2>
       <div className="medicine-display-list">
-        {food_list.map((item, index) => {
-          // Display medicines based on selected category
+        {medicine_list.map((item, index) => {
           if (category === "All" || category === item.category) {
             return <MedicineItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />;
           }
+          return null;
         })}
       </div>
     </div>
