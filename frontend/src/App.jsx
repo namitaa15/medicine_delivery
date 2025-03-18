@@ -8,13 +8,14 @@ import Footer from './components/Footer/Footer';
 import LoginPopup from './components/LoginPopup/LoginPopup';
 import Verify from './pages/Verify/Verify';
 import MyOrders from './pages/MyOrders/MyOrders';
+import StoreContextProvider from './context/StoreContext';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   return (
     <Router>
-      <>
+      <StoreContextProvider>
         {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
 
         <div className="app">
@@ -30,7 +31,7 @@ const App = () => {
         </div>
 
         <Footer />
-      </>
+      </StoreContextProvider>
     </Router>
   );
 };

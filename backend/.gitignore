@@ -1,2 +1,4 @@
 .env
 update_medicine_categories.py
+
+node_modules/

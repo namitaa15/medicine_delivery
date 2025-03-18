@@ -10,14 +10,6 @@ const Navbar = ({ setShowLogin }) => {
     // Get context values
     const store = useContext(StoreContext);
 
-    // Debugging: Check if StoreContext is properly provided
-    console.log("StoreContext Value:", store);
-
-    if (!store || typeof store.getTotalCartAmount !== "function") {
-        console.error("getTotalCartAmount is missing from StoreContext!");
-        return null; // Prevent rendering if context is missing
-    }
-
     const { getTotalCartAmount, token, setToken } = store;
     const navigate = useNavigate();
 
