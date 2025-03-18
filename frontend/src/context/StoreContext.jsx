@@ -61,7 +61,7 @@ const StoreContextProvider = (props) => {
     // Fetch medicine list (ensuring valid data)
     const fetchMedicineList = async () => {
         try {
-            const response = await axios.get(url + "/api/medicines/list");
+            const response = await axios.get(url + "/api/medicines");
             if (response.data && response.data.data) {
                 setMedicineList(response.data.data);
             } else {
