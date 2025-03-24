@@ -1,22 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './Navbar.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 import { assets } from '../../assets/assets';
+import { Avatar } from '@mui/material';
+import { blue } from '@mui/material/colors';
+import TemporaryDrawer from './TemporaryDrawer';
 
 const Navbar = ({ setShowLogin }) => {
     const [menu, setMenu] = useState('home');
+    const [open, setOpen] = useState(false);
+
+    const toggleDrawer = () => {
+        setOpen(!open);
+    };
 
     // Get context values
     const store = useContext(StoreContext);
 
     const { getTotalCartAmount } = store;
-    const navigate = useNavigate();
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        navigate('/');
-    };
+
 
     useEffect(() => {
         const toggle = document.getElementById('visual-toggle');
@@ -51,26 +55,26 @@ const Navbar = ({ setShowLogin }) => {
     }, []);
 
     return (
-        <div className="navbar">
+        <div className="bg-white py-2 px-3 flex items-center justify-between">
             <Link to="/" className="logo" style={{ fontWeight: 'bold', fontSize: '22px', color: '#2b73d1', textDecoration: 'none' }}>
                 MediCare<span style={{ color: '#4a6cf7' }}></span>
             </Link>
 
-            <ul className="navbar-menu">
-                <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'active' : ''}>
+            <ul className="navbar-menu hidden lg:flex lg:items-center lg:gap-3">
+                <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'font-bold' : ''}>
                     Dashboard
                 </Link>
-                <Link to="/medicines" onClick={() => setMenu('medicines')} className={menu === 'medicines' ? 'active' : ''}>
+                <Link to="/medicines" onClick={() => setMenu('medicines')} className={menu === 'medicines' ? 'font-bold' : ''}>
                     Medicines
                 </Link>
-                <a href="#categories" onClick={() => setMenu('categories')} className={menu === 'categories' ? 'active' : ''}>
+                <a href="#categories" onClick={() => setMenu('categories')} className={menu === 'categories' ? 'font-bold' : ''}>
                     Categories
                 </a>
-                <a href="#footer" onClick={() => setMenu('contact-us')} className={menu === 'contact-us' ? 'active' : ''}>
+                <a href="#footer" onClick={() => setMenu('contact-us')} className={menu === 'contact-us' ? 'font-bold' : ''}>
                     Customer Support
                 </a>
             </ul>
-            <div className="navbar-right">
+            <div className="flex items-center gap-2 ">
                 <div className="navbar-search-icon">
                     <Link to="/cart">
                         <img className="basketlogo" src={assets.basket_icon} alt="Cart Icon" />
@@ -82,22 +86,14 @@ const Navbar = ({ setShowLogin }) => {
                         Sign In
                     </button>
                 ) : (
-                    <div className="navbar-profile">
-                        <img src={assets.profile_icon} className="white-filter" alt="Profile" />
-                        <ul className="nav-profile-dropdown">
-                            <li onClick={() => navigate('/myorders')}>
-                                <img src={assets.bag_icon} alt="Orders Icon" />
-                                <p>My Orders</p>
-                            </li>
-                            <hr />
-                            <li onClick={logout}>
-                                <img src={assets.logout_icon} alt="Logout Icon" />
-                                <p>Logout</p>
-                            </li>
-                        </ul>
+                    <div className="navbar-profile" onClick={toggleDrawer}>
+                        <Avatar sx={{ bgcolor: blue[500] }}
+                            alt="Remy Sharp"
+                            src="/broken-image.jpg" ></Avatar>
                     </div>
                 )}
             </div>
+            <TemporaryDrawer open={open} toggleDrawer={toggleDrawer} />
         </div>
     );
 };

@@ -6,12 +6,8 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import { Button, CardActions } from '@mui/material';
 
-interface ActionAreaCardProps {
-    image: string;
-    title: string;
-    onClick: () => void
-}
-export default function ActionAreaCard({ image, title, onClick }: ActionAreaCardProps) {
+
+export default function ActionAreaCard({ image, title, onClick }) {
     return (
         <Card sx={{ maxWidth: 345, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <CardActionArea>
