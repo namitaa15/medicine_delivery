@@ -101,16 +101,6 @@ const StoreContextProvider = (props) => {
         loadData();
     }, []);
 
-    // Debugging: Check if context values exist
-    useEffect(() => {
-        console.log("StoreContext Updated:", {
-            medicine_list,
-            cartItems,
-            getTotalCartAmount,
-            token,
-        });
-    }, [medicine_list, cartItems, token]);
-
     // Provide context to children
     const contextValue = {
         medicine_list,
