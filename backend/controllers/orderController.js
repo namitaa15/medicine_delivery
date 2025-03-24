@@ -1,5 +1,4 @@
 import Order from "../models/orderModel.js";
-
 const placeOrder = async (req, res) => {
     const { orderItems, totalPrice } = req.body;
 

@@ -12,7 +12,7 @@ const ExploreMenu = () => {
     { menu_name: "Fever Medicines", menu_image: assets.fever },
     { menu_name: "Allergy Medicines", menu_image: assets.allergy },
     { menu_name: "Acidity & Stomach Medicines", menu_image: assets.acidity },
-    { menu_name: "Diabetes Medicines", menu_image: assets.suger }, // typo fixed: suger ➜ sugar
+    { menu_name: "Diabetes Medicines", menu_image: assets.suger },
     { menu_name: "Heart & BP Medicines", menu_image: assets.heart },
     { menu_name: "Cough & Cold", menu_image: assets.cough },
     { menu_name: "Brain & Mental Health Medicines", menu_image: assets.brain },

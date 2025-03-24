@@ -11,7 +11,6 @@ const Home = () => {
     <div>
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} />
-      {/* Removed MedicineDisplay */}
       <AppDownload />
     </div>
   );

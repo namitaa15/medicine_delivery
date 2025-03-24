@@ -77,7 +77,7 @@ const StoreContextProvider = (props) => {
     // Load cart data from backend (ensuring valid data)
     const loadCartData = async (token) => {
         try {
-            const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
+            const response = await axios.post(url + "/api/cart/", {}, { headers: { token } });
             if (response.data && response.data.cartData) {
                 setCartItems(response.data.cartData);
             } else {
