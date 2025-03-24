@@ -10,7 +10,7 @@ function MedicineItem ({ id, name, price, description, image }) {
   return (
     <div className='medicine-item'>
         <div className="medicine-item-img-container">
-            <img className='medicine-item-image' src={url+"/images/"+image} alt="" />
+        <img className='medicine-item-image' src={image} alt={name} />
             {!cartItems[id]
                 ?<img className='add' onClick={() => addToCart(id)} src={assets.add_icon_white} alt="" />
                 :<div className='medicine-item-counter'>

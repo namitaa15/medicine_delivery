@@ -15,27 +15,26 @@ const App = () => {
 
   return (
     <Router>
-  <StoreContextProvider>
-    {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
+      <StoreContextProvider>
+        {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
 
-    <div className="app-wrapper"> {/* ✅ NEW WRAPPER */}
-      <Navbar setShowLogin={setShowLogin} />
+        <div className="app-wrapper"> {/* Content Wrapper */}
+          <Navbar setShowLogin={setShowLogin} />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/order" element={<PlaceOrder />} />
+              <Route path="/verify" element={<Verify />} />
+              <Route path="/myorders" element={<MyOrders />} />
+            </Routes>
+          </main>
+        </div>
 
-      <main className="main-content"> {/* ✅ MAIN FLEX ITEM */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/verify" element={<Verify />} />
-          <Route path="/myorders" element={<MyOrders />} />
-        </Routes>
-      </main>
-
-      <Footer />
-    </div>
-  </StoreContextProvider>
-</Router>
-
+        {/* Footer OUTSIDE the wrapper = full width */}
+        <Footer />
+      </StoreContextProvider>
+    </Router>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-
+import { assignImageToMedicines } from "../components/imageAssigner"; // adjust path
 // Create the context
 export const StoreContext = createContext({});
 
@@ -63,7 +63,8 @@ const StoreContextProvider = (props) => {
         try {
             const response = await axios.get(url + "/api/medicines");
             if (response.data && response.data.data) {
-                setMedicineList(response.data.data);
+                const updatedMedicines = assignImageToMedicines(response.data.data);
+setMedicineList(updatedMedicines);
             } else {
                 console.warn("API response did not contain medicine data.");
                 setMedicineList([]); // Prevent undefined issues

@@ -6,10 +6,7 @@ import { assets } from '../../assets/assets';
 
 const Navbar = ({ setShowLogin }) => {
     const [menu, setMenu] = useState('home');
-
-    // Get context values
     const store = useContext(StoreContext);
-
     const { getTotalCartAmount, token, setToken } = store;
     const navigate = useNavigate();
 
@@ -54,8 +51,8 @@ const Navbar = ({ setShowLogin }) => {
     return (
         <div className="navbar">
             <Link to="/" className="logo" style={{ fontWeight: 'bold', fontSize: '22px', color: '#2b73d1', textDecoration: 'none' }}>
-  MediCare<span style={{ color: '#4a6cf7' }}></span>
-</Link>
+                MediCare<span style={{ color: '#4a6cf7' }}></span>
+            </Link>
 
             <ul className="navbar-menu">
                 <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'active' : ''}>
@@ -64,16 +61,8 @@ const Navbar = ({ setShowLogin }) => {
                 <Link to="/medicines" onClick={() => setMenu('medicines')} className={menu === 'medicines' ? 'active' : ''}>
                     Medicines
                 </Link>
-                <a href="#categories" onClick={() => setMenu('categories')} className={menu === 'categories' ? 'active' : ''}>
-                    Categories
-                </a>
-                <a href="#app-download" onClick={() => setMenu('mobile-app')} className={menu === 'mobile-app' ? 'active' : ''}>
-                    Mobile App
-                </a>
-                <a href="#footer" onClick={() => setMenu('contact-us')} className={menu === 'contact-us' ? 'active' : ''}>
-                    Customer Support
-                </a>
             </ul>
+
             <div className="navbar-right">
                 <div className="navbar-search-icon">
                     <Link to="/cart">
