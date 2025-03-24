@@ -53,9 +53,10 @@ const Navbar = ({ setShowLogin }) => {
 
     return (
         <div className="navbar">
-            <Link to="/">
-                <img src={assets.logo} alt="Logo" className="logo" />
-            </Link>
+            <Link to="/" className="logo" style={{ fontWeight: 'bold', fontSize: '22px', color: '#2b73d1', textDecoration: 'none' }}>
+  MediCare<span style={{ color: '#4a6cf7' }}></span>
+</Link>
+
             <ul className="navbar-menu">
                 <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'active' : ''}>
                     Dashboard

@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ExploreMenu.css";
+import { useNavigate } from "react-router-dom";
+import { assets } from '../../assets/assets';
 
-const ExploreMenu = ({ onCategorySelect }) => {
-  const [activeCategory, setActiveCategory] = useState("All");
+const ExploreMenu = () => {
+  const navigate = useNavigate();
 
-  // Define the categories and their respective images
   const menu_list = [
-    { menu_name: "Painkillers", menu_image: "path_to_painkillers_image.jpg" },
-    { menu_name: "Antibiotics", menu_image: "path_to_antibiotics_image.jpg" },
-    { menu_name: "Fever Medicines", menu_image: "path_to_fever_medicines_image.jpg" },
-    { menu_name: "Allergy Medicines", menu_image: "path_to_allergy_medicines_image.jpg" },
-    { menu_name: "Acidity & Stomach Medicines", menu_image: "path_to_acidity_medicines_image.jpg" },
-    { menu_name: "Diabetes Medicines", menu_image: "path_to_diabetes_medicines_image.jpg" },
-    { menu_name: "Heart & BP Medicines", menu_image: "path_to_heart_bp_medicines_image.jpg" },
-    { menu_name: "Cough & Cold", menu_image: "path_to_cough_cold_image.jpg" },
-    { menu_name: "Brain & Mental Health Medicines", menu_image: "path_to_brain_mental_health_image.jpg" },
+    { menu_name: "Painkillers", menu_image: assets.painkiller },
+    { menu_name: "Antibiotics", menu_image: assets.antibiotics },
+    { menu_name: "Fever Medicines", menu_image: assets.fever },
+    { menu_name: "Allergy Medicines", menu_image: assets.allergy },
+    { menu_name: "Acidity & Stomach Medicines", menu_image: assets.acidity },
+    { menu_name: "Diabetes Medicines", menu_image: assets.suger }, // typo fixed: suger ➜ sugar
+    { menu_name: "Heart & BP Medicines", menu_image: assets.heart },
+    { menu_name: "Cough & Cold", menu_image: assets.cough },
+    { menu_name: "Brain & Mental Health Medicines", menu_image: assets.brain },
+    { menu_name: "Others", menu_image: assets.others },
   ];
 
-  const handleCategoryClick = (category) => {
-    setActiveCategory(category);
-    onCategorySelect(category); // Pass the selected category to the parent component
+  const handleCategoryClick = (selectedCategory) => {
+    // navigate to /category/:categoryName
+    navigate(`/category/${encodeURIComponent(selectedCategory)}`);
   };
 
   return (
@@ -29,7 +31,7 @@ const ExploreMenu = ({ onCategorySelect }) => {
         {menu_list.map((item, index) => (
           <div
             key={index}
-            className={`menu-item ${activeCategory === item.menu_name ? "active" : ""}`}
+            className="menu-item"
             onClick={() => handleCategoryClick(item.menu_name)}
           >
             <img src={item.menu_image} alt={item.menu_name} />

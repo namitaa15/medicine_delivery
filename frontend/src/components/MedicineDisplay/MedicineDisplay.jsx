@@ -6,21 +6,32 @@ import MedicineItem from "../MedicineItem/MedicineItem";
 const MedicineDisplay = ({ category }) => {
   const { medicine_list } = useContext(StoreContext);
 
-  // Prevent .map() error by checking if medicine_list exists
   if (!medicine_list || medicine_list.length === 0) {
-      return <p>Loading medicines...</p>;
+    return <p>Loading medicines...</p>;
   }
+
+  // Filtered list based on selected category
+  const filteredMedicines = medicine_list.filter(
+    (item) => category === "All" || item.category === category
+  );
 
   return (
     <div className="medicine-display" id="medicine-display">
-      <h2 className="h2we">Top medicines near you</h2>
+      <h2 className="h2we">Top Medicines Near You 🩺</h2>
+      {category !== "All" && (
+        <h3 className="category-title">💊 {category}</h3>
+      )}
       <div className="medicine-display-list">
-        {medicine_list.map((item, index) => {
-          if (category === "All" || category === item.category) {
-            return <MedicineItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />;
-          }
-          return null;
-        })}
+        {filteredMedicines.map((item) => (
+          <MedicineItem
+            key={item._id}
+            id={item._id}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+            image={item.image}
+          />
+        ))}
       </div>
     </div>
   );

@@ -42,20 +42,27 @@ const loginUser = async (req, res) => {
 
     try {
         const user = await User.findOne({ email });
+        console.log("🧠 Checking login for:", email);
 
-        if (user && (await user.matchPassword(password))) {
-            res.json({
-                success: true,
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                token: generateToken(user._id),
-            });
-        } else {
-            res.status(401).json({ success: false, message: "Invalid email or password" });
+        if (!user) {
+            return res.status(401).json({ success: false, message: "User not found" });
         }
+
+        const isMatch = await user.matchPassword(password);
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: "Incorrect password" });
+        }
+
+        res.json({
+            success: true,
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            token: generateToken(user._id),
+        });
+
     } catch (error) {
-        console.error("❌ Error logging in user:", error);
+        console.error("❌ Error logging in user:", error.message);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
