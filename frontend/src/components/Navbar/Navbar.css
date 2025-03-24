@@ -5,9 +5,6 @@
     align-items: center;
     justify-content: space-between;
     background: white;
-    position: fixed; /* optional: stick it on scroll */
-    top: 0;
-    left: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   }

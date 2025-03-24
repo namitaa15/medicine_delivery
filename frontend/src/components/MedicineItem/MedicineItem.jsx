@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import './MedicineItem.css';
 import { assets } from '../../assets/assets';
-import { useState } from 'react';
 import { StoreContext } from '../../context/StoreContext';
 
 function MedicineItem ({ id, name, price, description, image }) {

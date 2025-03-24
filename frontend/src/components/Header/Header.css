@@ -1,25 +1,13 @@
 .header {
-    height: 37vw;
-    margin: 100px auto 30px; /* pushed down to clear navbar */
+    height: 70vh;
     background: url('/header_img.png') no-repeat center center;
     background-size: cover; /* fill nicely */
-    background-position: center;
-    border-radius: 16px;
-    max-width: 1200px; /* match other sections */
-    position: relative;
+    background-position: center center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   }
   
   /* Content inside hero/banner */
   .header-contents {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
-    left: 6vw;
     animation: fadeIn 3s ease;
   }
   
@@ -30,67 +18,3 @@
     font-size: max(4.5vw, 26px);
   }
   
-  .header-contents p {
-    color: white;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
-    font-size: 1.1vw;
-    line-height: 1.4;
-  }
-  
-  .header-contents button {
-    border: none;
-    color: #3964d6;
-    font-weight: 600;
-    padding: 1vw 2.3vw;
-    background-color: white;
-    font-size: max(1vw, 14px);
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .header-contents button:hover {
-    background-color: #3964d6;
-    color: white;
-    transform: translateY(-2px);
-  }
-  
-  /* Theme Overrides */
-  :root .buttonwl {
-    color: black;
-  }
-  
-  .lightcolors .buttonwl {
-    color: #747474;
-  }
-  
-  /* Responsive Tweaks */
-  @media (max-width: 1050px) {
-    .header-contents {
-      max-width: 60%;
-    }
-  }
-  
-  @media (max-width: 750px) {
-    .header {
-      height: auto;
-      padding: 100px 20px 40px;
-      text-align: center;
-    }
-  
-    .header-contents {
-      position: static;
-      align-items: center;
-      text-align: center;
-      max-width: 100%;
-    }
-  
-    .header-contents p {
-      display: none;
-    }
-  
-    .header-contents button {
-      padding: 3vw 5vw;
-    }
-  }  

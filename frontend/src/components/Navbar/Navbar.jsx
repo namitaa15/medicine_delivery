@@ -66,9 +66,6 @@ const Navbar = ({ setShowLogin }) => {
                 <a href="#categories" onClick={() => setMenu('categories')} className={menu === 'categories' ? 'active' : ''}>
                     Categories
                 </a>
-                <a href="#app-download" onClick={() => setMenu('mobile-app')} className={menu === 'mobile-app' ? 'active' : ''}>
-                    Mobile App
-                </a>
                 <a href="#footer" onClick={() => setMenu('contact-us')} className={menu === 'contact-us' ? 'active' : ''}>
                     Customer Support
                 </a>

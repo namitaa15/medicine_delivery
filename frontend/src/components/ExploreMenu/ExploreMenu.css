@@ -1,10 +1,6 @@
 .explore-menu {
   padding: 20px 10px;
   background: linear-gradient(to bottom right, #f3f4ff, #ffffff);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .explore-title {
@@ -15,48 +11,4 @@
   margin-bottom: 30px;
   font-family: 'Poppins', sans-serif;
 }
-.menu-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px 12px; /* less vertical space */
-  justify-items: center;
-  align-items: stretch;
-}
 
-
-.menu-item {
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 16px;
-  width: 150px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(57, 100, 214, 0.08);
-  cursor: pointer;
-  margin: 0;
-}
-
-.menu-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(57, 100, 214, 0.15);
-}
-
-.menu-item.active {
-  border: 2px solid #3964d6;
-  transform: scale(1.05);
-}
-
-.menu-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-
-
-.menu-item p {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
