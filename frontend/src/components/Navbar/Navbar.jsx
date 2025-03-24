@@ -10,12 +10,11 @@ const Navbar = ({ setShowLogin }) => {
     // Get context values
     const store = useContext(StoreContext);
 
-    const { getTotalCartAmount, token, setToken } = store;
+    const { getTotalCartAmount } = store;
     const navigate = useNavigate();
 
     const logout = () => {
         localStorage.removeItem('token');
-        setToken('');
         navigate('/');
     };
 
@@ -54,8 +53,8 @@ const Navbar = ({ setShowLogin }) => {
     return (
         <div className="navbar">
             <Link to="/" className="logo" style={{ fontWeight: 'bold', fontSize: '22px', color: '#2b73d1', textDecoration: 'none' }}>
-  MediCare<span style={{ color: '#4a6cf7' }}></span>
-</Link>
+                MediCare<span style={{ color: '#4a6cf7' }}></span>
+            </Link>
 
             <ul className="navbar-menu">
                 <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'active' : ''}>
@@ -81,7 +80,7 @@ const Navbar = ({ setShowLogin }) => {
                     </Link>
                     <div className={getTotalCartAmount() === 0 ? '' : 'dot'}></div>
                 </div>
-                {!token ? (
+                {!localStorage.getItem('token') ? (
                     <button className="signbutton" onClick={() => setShowLogin(true)}>
                         Sign In
                     </button>
