@@ -2,7 +2,13 @@
   width: 100%;
   background: linear-gradient(to right, #5a3d99, #3964d6);
   color: white;
+<<<<<<< HEAD
   padding: 20px 0;
+=======
+  padding: 60px 8vw 30px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+>>>>>>> urgent-issues-fix
   font-family: 'Poppins', sans-serif;
   margin-top: 100px;
 }

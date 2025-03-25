@@ -4,14 +4,14 @@ import User from "../models/userModel.js";
 const authMiddleware = async (req, res, next) => {
     let token;
 
-    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+    if (req.headers.token) {
         try {
-            token = req.headers.authorization.split(" ")[1];
+            token = req.headers.token;
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findById(decoded.id).select("-password");
             next();
         } catch (error) {
-            console.error("❌ Not authorized, token failed");
+            console.error("❌ Not authorized, token failed", error);
             res.status(401).json({ success: false, message: "Not authorized, token failed" });
         }
     }

@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+
 html, body {
   height: 100%;
   margin: 0;
@@ -16,8 +19,6 @@ html, body {
 }
 
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
   font-family: Outfit;
   scroll-behavior: smooth;

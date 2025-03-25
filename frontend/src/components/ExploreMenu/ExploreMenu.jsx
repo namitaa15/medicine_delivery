@@ -2,6 +2,7 @@ import React from "react";
 import "./ExploreMenu.css";
 import { useNavigate } from "react-router-dom";
 import { assets } from '../../assets/assets';
+import ActionAreaCard from "./ActionAreaCard";
 
 const ExploreMenu = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const ExploreMenu = () => {
     { menu_name: "Fever Medicines", menu_image: assets.fever },
     { menu_name: "Allergy Medicines", menu_image: assets.allergy },
     { menu_name: "Acidity & Stomach Medicines", menu_image: assets.acidity },
-    { menu_name: "Diabetes Medicines", menu_image: assets.suger }, // typo fixed: suger ➜ sugar
+    { menu_name: "Diabetes Medicines", menu_image: assets.suger },
     { menu_name: "Heart & BP Medicines", menu_image: assets.heart },
     { menu_name: "Cough & Cold", menu_image: assets.cough },
     { menu_name: "Brain & Mental Health Medicines", menu_image: assets.brain },
@@ -25,18 +26,11 @@ const ExploreMenu = () => {
   };
 
   return (
-    <div className="explore-menu">
+    <div className="explore-menu flex flex-col w-full items-center" id="explore-menu">
       <h2 className="explore-title">Explore Categories</h2>
-      <div className="menu-items">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:w-3/4 px-3 mx-auto">
         {menu_list.map((item, index) => (
-          <div
-            key={index}
-            className="menu-item"
-            onClick={() => handleCategoryClick(item.menu_name)}
-          >
-            <img src={item.menu_image} alt={item.menu_name} />
-            <p>{item.menu_name}</p>
-          </div>
+          <ActionAreaCard key={item.menu_name + index.toString()} image={item.menu_image} title={item.menu_name} onClick={() => handleCategoryClick(item.menu_name)} />
         ))}
       </div>
     </div>

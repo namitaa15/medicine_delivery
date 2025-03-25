@@ -7,8 +7,8 @@ export const StoreContext = createContext({});
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const url = "http://localhost:5002"; // Ensure backend is running on this port
-    const [token, setToken] = useState("");
     const [medicine_list, setMedicineList] = useState([]);
+    const [token, setToken] = useState(localStorage.getItem("token"));
 
     // Add item to cart
     const addToCart = async (itemId) => {
@@ -16,9 +16,10 @@ const StoreContextProvider = (props) => {
             ...prev,
             [itemId]: (prev[itemId] || 0) + 1,
         }));
+        const token = localStorage.getItem("token");
         if (token) {
             try {
-                await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
+                await axios.post(url + "/api/orders/add", { itemId }, { headers: { token } });
             } catch (error) {
                 console.error("Error adding to cart:", error);
             }
@@ -31,9 +32,10 @@ const StoreContextProvider = (props) => {
             ...prev,
             [itemId]: Math.max(0, (prev[itemId] || 0) - 1),
         }));
+        const token = localStorage.getItem("token");
         if (token) {
             try {
-                await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } });
+                await axios.post(url + "/api/orders/remove", { itemId }, { headers: { token } });
             } catch (error) {
                 console.error("Error removing from cart:", error);
             }
@@ -62,25 +64,27 @@ const StoreContextProvider = (props) => {
     const fetchMedicineList = async () => {
         try {
             const response = await axios.get(url + "/api/medicines");
+            console.log("📦 Medicines fetched from backend:", response.data.data); // 👈 ADD THIS
             if (response.data && response.data.data) {
                 const updatedMedicines = assignImageToMedicines(response.data.data);
 setMedicineList(updatedMedicines);
             } else {
                 console.warn("API response did not contain medicine data.");
-                setMedicineList([]); // Prevent undefined issues
+                setMedicineList([]);
             }
         } catch (error) {
             console.error("Error fetching medicine list:", error);
-            setMedicineList([]); // Prevent crashes if API fails
+            setMedicineList([]);
         }
     };
+    
 
     // Load cart data from backend (ensuring valid data)
     const loadCartData = async (token) => {
         try {
-            const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
-            if (response.data && response.data.cartData) {
-                setCartItems(response.data.cartData);
+            const response = await axios.post(url + "/api/orders/unplaced", {}, { headers: { token } });
+            if (response.data && response.data.orders) {
+                setCartItems(response.data.orders);
             } else {
                 setCartItems({}); // Prevent undefined errors
             }
@@ -102,16 +106,6 @@ setMedicineList(updatedMedicines);
         loadData();
     }, []);
 
-    // Debugging: Check if context values exist
-    useEffect(() => {
-        console.log("StoreContext Updated:", {
-            medicine_list,
-            cartItems,
-            getTotalCartAmount,
-            token,
-        });
-    }, [medicine_list, cartItems, token]);
-
     // Provide context to children
     const contextValue = {
         medicine_list,
@@ -122,7 +116,7 @@ setMedicineList(updatedMedicines);
         getTotalCartAmount,
         url,
         token,
-        setToken,
+        setToken
     };
 
     return (
