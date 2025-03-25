@@ -1,54 +1,35 @@
 import mongoose from "mongoose";
-import axios from "axios";
 import dotenv from "dotenv";
-import Medicine from "./models/medicineModel.js"; // Import Medicine Model
+import Medicine from "./models/medicineModel.js";
 
-dotenv.config(); // Load environment variables
+dotenv.config();
+await mongoose.connect(process.env.MONGO_URI);
+console.log("✅ MongoDB Connected!");
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("✅ MongoDB Connected!"))
-    .catch((err) => console.error("❌ MongoDB Connection Failed!", err));
+// Image filenames (m1 to m9)
+const imageFilenames = [
+  "m1.png", "m2.png", "m3.png",
+  "m4.png", "m5.png", "m6.png",
+  "m7.png", "m8.png", "m9.png"
+];
 
-// Function to fetch and store medicines
-const fetchAndStoreMedicines = async () => {
-    try {
-        const response = await axios.get('https://rxnav.nlm.nih.gov/REST/drugs.json?name=aspirin');
-        const drugGroup = response.data.drugGroup?.conceptGroup || []; // Ensure API response is structured
+const assignImagesToMedicines = async () => {
+  try {
+    const medicines = await Medicine.find();
 
-        const formattedMedicines = [];
-
-        drugGroup.forEach(group => {
-            if (group.conceptProperties) {
-                group.conceptProperties.forEach(drug => {
-                    formattedMedicines.push({
-                        name: drug.synonym || "Unknown",
-                        genericName: drug.synonym || "Unknown",
-                        manufacturer: "Unknown",
-                        category: group.tty || "General",
-                        description: "No description available.",
-                        dosage: "Follow doctor's prescription.",
-                        warnings: "No warnings.",
-                        imageUrl: `https://rximage.nlm.nih.gov/api/rximage/1/rxnav?rxcui=${drug.rxcui}`
-                    });
-                });
-            }
-        });
-
-        if (formattedMedicines.length === 0) {
-            console.log("⚠ No medicines found. API response might have changed.");
-            return;
-        }
-
-        await Medicine.deleteMany();
-        await Medicine.insertMany(formattedMedicines);
-        console.log("✅ Medicines saved successfully!");
-
-        mongoose.connection.close();
-    } catch (error) {
-        console.error("❌ Error fetching medicines:", error);
+    for (let i = 0; i < medicines.length; i++) {
+      const imageFile = `/assets/${imageFilenames[i % imageFilenames.length]}`;
+      medicines[i].imageUrl = imageFile;
+      await medicines[i].save();
+      console.log(`✅ Updated ${medicines[i].name} with image ${imageFile}`);
     }
+
+    console.log("🎉 All medicines updated with images!");
+    mongoose.connection.close();
+  } catch (err) {
+    console.error("❌ Error updating images:", err);
+    mongoose.connection.close();
+  }
 };
 
-// Run the function
-fetchAndStoreMedicines();
+assignImagesToMedicines();

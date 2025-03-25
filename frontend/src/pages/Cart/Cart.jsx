@@ -1,72 +1,109 @@
-import React, { useContext } from "react";
-import { StoreContext } from "../../context/StoreContext";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import './Cart.css';
+import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const { cartItems = {}, medicine_list = [], removeFromCart } = useContext(StoreContext);
+  const {
+    cartItems = {},
+    medicine_list = [],
+    addToCart,
+    removeFromCart,
+    getTotalCartAmount,
+    url,
+  } = useContext(StoreContext);
 
-  // Get items from cart (convert object to array)
-  const cartData = Object.entries(cartItems).map(([id, quantity]) => {
-    const medicine = medicine_list.find((m) => m._id === id);
-    return medicine
-      ? {
-          ...medicine,
-          quantity,
-        }
-      : null;
-  }).filter(Boolean); // Remove nulls
+  const navigate = useNavigate();
 
-  const handleRemove = (medicineId) => {
-    removeFromCart(medicineId);
+  const cartData = medicine_list
+    .filter((item) => cartItems[item._id] > 0)
+    .map((item) => ({
+      ...item,
+      quantity: cartItems[item._id],
+    }));
+
+  const getImage = (imageUrl) => {
+    try {
+      const key = `../../assets${imageUrl.replace('/assets', '')}`;
+      const images = import.meta.glob('../../assets/*.png', {
+        eager: true,
+        import: 'default',
+      });
+      return images[key];
+    } catch {
+      return null;
+    }
   };
-
-  const handleQuantityChange = () => {
-    // This function needs to be implemented if you want quantity update
-  };
-
-  const totalPrice = cartData.reduce(
-    (total, medicine) => total + medicine.price * medicine.quantity,
-    0
-  );
 
   return (
-    <div className="cart-container">
-      <h1>Your Cart</h1>
+    <div className="cart">
       <div className="cart-items">
-        {cartData.length === 0 ? (
-          <p>Your cart is empty. <Link to="/home">Go back</Link> to shopping.</p>
-        ) : (
-          cartData.map((medicine) => (
-            <div key={medicine._id} className="cart-item">
-              <img src={medicine.image} alt={medicine.name} />
-              <div className="item-details">
-                <h3>{medicine.name}</h3>
-                <p>Price: ₹{medicine.price}</p>
-                <div className="quantity-control">
-                  <button disabled>-</button>
-                  <span>{medicine.quantity}</span>
-                  <button disabled>+</button>
-                </div>
-                <button
-                  className="remove-button"
-                  onClick={() => handleRemove(medicine._id)}
-                >
-                  Remove
-                </button>
-              </div>
+        <div className="cart-items-title">
+          <p>Image</p>
+          <p>Name</p>
+          <p>Price</p>
+          <p>Quantity</p>
+          <p>Total</p>
+          <p>Remove</p>
+        </div>
+        <br />
+        <hr />
+
+        {cartData.map((item, index) => (
+          <div key={item._id}>
+            <div className="cart-items-title cart-items-item">
+              <img
+                src={getImage(item.imageUrl)}
+                alt={item.name}
+                style={{ width: '80px', height: '80px', objectFit: 'contain' }}
+              />
+              <p>{item.name}</p>
+              <p>₹{item.price}</p>
+              <p className="qty-control">
+                <button onClick={() => removeFromCart(item._id)}>-</button>
+                {item.quantity}
+                <button onClick={() => addToCart(item._id)}>+</button>
+              </p>
+              <p>₹{item.price * item.quantity}</p>
+              <p onClick={() => removeFromCart(item._id)} className="cross">
+                x
+              </p>
             </div>
-          ))
-        )}
+            <hr />
+          </div>
+        ))}
       </div>
 
-      {cartData.length > 0 && (
-        <div className="cart-summary">
-          <h3>Total Price: ₹{totalPrice}</h3>
-          <Link to="/placeorder">
-            <button className="place-order-button">Place Order</button>
-          </Link>
+      <div className="cart-bottom">
+        <div className="cart-total">
+          <h2>Cart Totals</h2>
+          <div>
+            <div className="cart-total-details">
+              <p>Subtotal</p>
+              <p>₹{getTotalCartAmount()}</p>
+            </div>
+            <hr />
+            <div className="cart-total-details">
+              <p>Delivery Fee</p>
+              <p>₹{getTotalCartAmount() === 0 ? 0 : 2}</p>
+            </div>
+            <hr />
+            <div className="cart-total-details">
+              <b>Total</b>
+              <b>₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
+            </div>
+          </div>
+          <button onClick={() => navigate('/order')}>PROCEED TO CHECKOUT</button>
         </div>
-      )}
+
+        <div className="cart-promocode">
+          <p className="promocodep">If you have a promo code, enter it here</p>
+          <div className="cart-promocode-input">
+            <input type="text" placeholder="Promo Code" />
+            <button>Apply</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

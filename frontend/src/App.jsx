@@ -17,15 +17,16 @@ const App = () => {
   return (
     <Router>
       <StoreContextProvider>
-        {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
+        {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
 
-        <div className="app-wrapper"> {/* ✅ NEW WRAPPER */}
+        <div className="app-wrapper">
           <Navbar setShowLogin={setShowLogin} />
 
-          <main className="main-content"> {/* ✅ MAIN FLEX ITEM */}
+          <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path='/medicines' element={<MedicineDisplay />} />
+              <Route path="/category/:categoryName" element={<Home />} /> {/* ✅ ADD IT HERE */}
+              <Route path="/medicines" element={<MedicineDisplay />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<PlaceOrder />} />
               <Route path="/verify" element={<Verify />} />
@@ -37,7 +38,6 @@ const App = () => {
         </div>
       </StoreContextProvider>
     </Router>
-
   );
 };
 

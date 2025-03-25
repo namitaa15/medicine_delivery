@@ -64,17 +64,19 @@ const StoreContextProvider = (props) => {
     const fetchMedicineList = async () => {
         try {
             const response = await axios.get(url + "/api/medicines");
+            console.log("📦 Medicines fetched from backend:", response.data.data); // 👈 ADD THIS
             if (response.data && response.data.data) {
                 setMedicineList(response.data.data);
             } else {
                 console.warn("API response did not contain medicine data.");
-                setMedicineList([]); // Prevent undefined issues
+                setMedicineList([]);
             }
         } catch (error) {
             console.error("Error fetching medicine list:", error);
-            setMedicineList([]); // Prevent crashes if API fails
+            setMedicineList([]);
         }
     };
+    
 
     // Load cart data from backend (ensuring valid data)
     const loadCartData = async (token) => {

@@ -10,15 +10,21 @@ const MedicineDisplay = ({ category }) => {
     return <p>Loading medicines...</p>;
   }
 
-  // Filtered list based on selected category
+  // 🧪 Debug logs (optional)
+  console.log("🧪 Category from URL:", category);
+  console.log("🧪 First 5 medicines:", medicine_list.slice(0, 5));
+
+  // ✅ Case-insensitive filtering
   const filteredMedicines = medicine_list.filter(
-    (item) => category === "All" || item.category === category
+    (item) =>
+      category.toLowerCase() === "all" ||
+      item.category?.toLowerCase() === category.toLowerCase()
   );
 
   return (
     <div className="medicine-display" id="medicine-display">
       <h2 className="h2we">Top Medicines Near You 🩺</h2>
-      {category !== "All" && (
+      {category.toLowerCase() !== "all" && (
         <h3 className="category-title">💊 {category}</h3>
       )}
       <div className="medicine-display-list">
@@ -28,8 +34,8 @@ const MedicineDisplay = ({ category }) => {
             id={item._id}
             name={item.name}
             description={item.description}
-            price={item.price}
-            image={item.image}
+            price={item.price || 0}
+            image={item.imageUrl} // ✅ Fix: use correct field
           />
         ))}
       </div>
