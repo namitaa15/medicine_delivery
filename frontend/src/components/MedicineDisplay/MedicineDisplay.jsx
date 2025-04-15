@@ -10,10 +10,6 @@ const MedicineDisplay = ({ category }) => {
     return <p>Loading medicines...</p>;
   }
 
-  // 🧪 Debug logs (optional)
-  console.log("🧪 Category from URL:", category);
-  console.log("🧪 First 5 medicines:", medicine_list.slice(0, 5));
-
   // ✅ Case-insensitive filtering
   const filteredMedicines = medicine_list.filter(
     (item) =>
@@ -33,7 +29,6 @@ const MedicineDisplay = ({ category }) => {
             key={item._id}
             id={item._id}
             name={item.name}
-            description={item.description}
             price={item.price || 0}
             image={item.imageUrl} // ✅ Fix: use correct field
           />

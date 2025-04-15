@@ -1,156 +1,182 @@
 .cart {
-    margin-top: 100px;
-  }
-  
-  .cart-items-title {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr 0.5fr; /* added space for qty buttons */
-    align-items: center;
-    color: grey;
-    font-size: max(1vw, 12px);
-  }
-  
-  .cart-items-item {
-    margin: 10px 0px;
-    color: black;
-  }
-  
-  .cart-items-item img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-  }
-  
-  .cart hr {
-    height: 1px;
-    background-color: #e2e2e2;
-    border: none;
-  }
-  
-  .cart-items-item .cross {
-    cursor: pointer;
-    color: crimson;
-    font-weight: bold;
-    font-size: 18px;
-  }
-  
-  .qty-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .qty-control button {
-    padding: 4px 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #f5f5f5;
-    cursor: pointer;
-  }
-  
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #f8f9fb;
+}
+
+.cart-items {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.cart-items-title {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr 0.5fr;
+  align-items: center;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #f0f0f0;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.cart-items-item {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr 0.5fr;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+.cart-items-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.cart-items-item p {
+  margin: 0;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.qty-control button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3964d6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.qty-control button:hover {
+  background-color: #5a3d99;
+}
+
+.cart-items-item .cross {
+  cursor: pointer;
+  color: crimson;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.cart-bottom {
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.cart-total {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.cart-total-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+}
+
+.cart-total hr {
+  margin: 10px 0;
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.cart-total button {
+  border: none;
+  color: white;
+  background-color: tomato;
+  width: max(15vw, 200px);
+  padding: 12px 0;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.cart-total button:hover {
+  background-color: rgb(255, 90, 50);
+}
+
+.cart-promocode {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.cart-promocode p {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cart-promocode-input {
+  display: flex;
+  background-color: #f3f3f3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cart-promocode-input input {
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.cart-promocode-input button {
+  background-color: black;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
   .cart-bottom {
-    margin-top: 80px;
-    display: flex;
-    justify-content: space-between;
-    gap: max(12vw, 20px);
+    flex-direction: column-reverse;
   }
-  
-  .cart-total {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .cart-items-title, .cart-items-item {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 12px;
+    text-align: center;
   }
-  
-  .cart-total-details {
-    display: flex;
-    justify-content: space-between;
-    color: #555;
+  .cart-items-item img {
+    margin: auto;
   }
-  
-  .cart-total hr {
-    margin: 10px 0px;
-  }
-  
-  .cart-total button {
-    border: none;
-    color: white;
-    background-color: tomato;
-    width: max(15vw, 200px);
-    padding: 12px 0px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .cart-promocode {
-    flex: 1;
-  }
-  
-  .cart-promocode p {
-    color: #555;
-  }
-  
-  .cart-promocode-input {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #eaeaea;
-    border-radius: 4px;
-  }
-  
-  .cart-promocode-input input {
-    background: transparent;
-    border: none;
-    outline: none;
-    padding-left: 10px;
-    font-size: 14px;
-    flex: 1;
-  }
-  
-  .cart-promocode-input button {
-    width: max(10vw, 150px);
-    padding: 12px 5px;
-    background-color: black;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* 🌙 Dark/light theme handling */
-  :root .cart-items-title {
-    color: white;
-  }
-  .lightcolors .cart-items-title {
-    color: grey;
-  }
-  :root .promocodep {
-    color: white;
-  }
-  .lightcolors .promocodep {
-    color: #555555;
-  }
-  :root .cart-total-details,
-  :root .cart-total {
-    color: white;
-  }
-  .lightcolors .cart-total-details,
-  .lightcolors .cart-total {
-    color: grey;
-  }
-  
-  /* 📱 Responsive */
-  @media (max-width: 750px) {
-    .cart-bottom {
-      flex-direction: column-reverse;
-    }
-    .cart-promocode {
-      justify-content: start;
-    }
-    .cart-items-title {
-      font-size: 10px;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
-    }
-  }  
+}

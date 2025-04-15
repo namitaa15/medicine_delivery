@@ -10,6 +10,7 @@ import Verify from './pages/Verify/Verify';
 import MyOrders from './pages/MyOrders/MyOrders';
 import StoreContextProvider from './context/StoreContext';
 import MedicineDisplay from './components/MedicineDisplay/MedicineDisplay';
+import CategoryMedicines from './pages/CategoryMedicines';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -19,38 +20,23 @@ const App = () => {
       <StoreContextProvider>
         {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
 
-<<<<<<< HEAD
-        <div className="app-wrapper"> {/* Content Wrapper */}
-          <Navbar setShowLogin={setShowLogin} />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-=======
         <div className="app-wrapper">
           <Navbar setShowLogin={setShowLogin} />
 
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/category/:categoryName" element={<Home />} /> {/* ✅ ADD IT HERE */}
+              <Route path="/category/:categoryName" element={<CategoryMedicines />} />
               <Route path="/medicines" element={<MedicineDisplay />} />
->>>>>>> urgent-issues-fix
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<PlaceOrder />} />
               <Route path="/verify" element={<Verify />} />
               <Route path="/myorders" element={<MyOrders />} />
             </Routes>
           </main>
-<<<<<<< HEAD
-        </div>
-
-        {/* Footer OUTSIDE the wrapper = full width */}
-        <Footer />
-=======
 
           <Footer />
         </div>
->>>>>>> urgent-issues-fix
       </StoreContextProvider>
     </Router>
   );

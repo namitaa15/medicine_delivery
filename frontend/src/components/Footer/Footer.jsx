@@ -1,11 +1,9 @@
 import React from 'react';
 import './Footer.css';
+import { assets } from '../../assets/assets'; // ✅ Make sure this import exists
 
 const Footer = () => {
   return (
-<<<<<<< HEAD
-    <footer className="footer">
-=======
     <footer className="footer" id='footer'>
       <div className="footer-content">
         {/* BRAND SECTION */}
@@ -42,7 +40,6 @@ const Footer = () => {
       </div>
 
       <hr />
->>>>>>> urgent-issues-fix
       <p className="copyright">© 2025 MediCare. All rights reserved.</p>
     </footer>
   );
