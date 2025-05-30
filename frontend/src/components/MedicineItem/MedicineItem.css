@@ -1,113 +1,199 @@
-.medicine-item{
+.medicine-item {
     width: 100%;
-    margin: auto;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px #00000015;
-    transition: 0.3s;
-    animation: fadeIn 1s;
-}
-
-.medicine-item-image{
-    width: 100%;
-    border-radius: 15px 15px 0px 0px;
-}
-
-.medicine-item-info{
-    padding: 20px;
-}
-
-.medicine-item-name-rating{
-    display: grid;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .medicine-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  .medicine-item-img-container {
+    position: relative;
+    background-color: #f9f9f9;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+  }
+  
+  .medicine-item-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  .add {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #4a6cf7;
+    border-radius: 50%;
+    padding: 6px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .medicine-item-info {
+    padding: 16px;
+    background-color: #fdfdfd;
+  }
+  
+  .medicine-item-name-rating {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.medicine-item-name-rating p{
-    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  
+  .namewe {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 2.6em;
+  }
+  
+  
+  .ratingstars {
+    width: 60px;
+  }
+  
+  .medicine-item-price {
+    color: #e53935;
+    font-size: 18px;
     font-weight: 500;
-}
-
-.medicine-item-name-rating img{
-    width: 70px;
-}
-
-.medicine-item-desc{
-    color: #676767;
-    font-size: 12px;
-}
-
-.medicine-item-price{
-    color: tomato;
-    font-size: 22px;
-    font-weight: 500;
-    margin: 10px 0px;
-}
-
-.medicine-item-img-container{
-    position: relative;
-}
-
-.medicine-item-img-container .add{
-    width: 35px;
+    margin-top: 4px;
+  }
+  
+  .medicine-item-counter {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-.medicine-item-counter{
-    cursor: pointer;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    border-radius: 25px;
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 6px;
-    border-radius: 50px;
-    background-color: white;
-}
-
-.medicine-item-counter img{
-    width: 30px;
-}
-
-:root .cartitemsp,
-:root .medicine-item-price,
-:root .medicine-item-desc,
-:root .ratingstars,
-:root .namewe {
+    padding: 6px 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .medicine-item-counter img {
+    width: 24px;
+    cursor: pointer;
+  }
+  
+  .cartitemsp {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  /* 🌙 Dark Mode (custom) */
+  :root .cartitemsp,
+  :root .medicine-item-price,
+  :root .ratingstars,
+  :root .namewe {
     color: white;
-}
-
-.lightcolors .medicine-item-desc{
-    color: grey;
-}
-
-.lightcolors .cartitemsp,
-.lightcolors .medicine-item-info,
-.lightcolors .medicine-item-price,
-.lightcolors .ratingstars,
-.lightcolors .namewe {
-    color: black; 
-}
-
-:root .medicine-item-counter,
-:root .medicine-item-info{
-    background-color: rgb(36, 32, 32);
-}
-
-.lightcolors .medicine-item-counter,
-.lightcolors .medicine-item-info{
-    background-color: #FFFFFF;
-}
-
-:root .medicine-item-img-container .add{
+  }
+  
+  :root .medicine-item-counter,
+  :root .medicine-item-info {
+    background: linear-gradient(to bottom right, #1f2937, #374151); /* nice dark gradient */
+  }
+  
+  :root .medicine-item-img-container .add {
     background-color: black;
-}
-
-.lightcolors .medicine-item-img-container .add{
+  }
+  
+  .lightcolors .medicine-item-counter,
+  .lightcolors .medicine-item-info {
+    background-color: #ffffff;
+  }
+  
+  .lightcolors .cartitemsp,
+  .lightcolors .medicine-item-price,
+  .lightcolors .ratingstars,
+  .lightcolors .namewe {
+    color: #000;
+  }
+  
+  .lightcolors .medicine-item-img-container .add {
     background-color: white;
-}
+  }
+  
+  /* 📱 Responsive Design */
+  @media (max-width: 1024px) {
+    .medicine-item-img-container {
+      height: 160px;
+      padding: 10px;
+    }
+  
+    .namewe {
+      font-size: 15px;
+    }
+  
+    .medicine-item-price {
+      font-size: 16px;
+    }
+  
+    .ratingstars {
+      width: 50px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .medicine-item {
+      border-radius: 10px;
+    }
+  
+    .medicine-item-img-container {
+      height: 150px;
+      padding: 8px;
+    }
+  
+    .namewe {
+      font-size: 14px;
+    }
+  
+    .medicine-item-info {
+      padding: 14px;
+    }
+  
+    .medicine-item-price {
+      font-size: 15px;
+    }
+  
+    .add {
+      width: 28px;
+      height: 28px;
+      padding: 4px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .medicine-item-img-container {
+      height: 130px;
+    }
+  
+    .namewe {
+      font-size: 13px;
+    }
+  
+    .ratingstars {
+      width: 44px;
+    }
+  }  

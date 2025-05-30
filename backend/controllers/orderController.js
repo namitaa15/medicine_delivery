@@ -1,6 +1,6 @@
 import Order from "../models/orderModel.js";
 const placeOrder = async (req, res) => {
-    const { orderItems, totalPrice } = req.body;
+    const { orderItems, totalPrice, shippingAddress, paymentMethod } = req.body;
 
     if (!orderItems || orderItems.length === 0) {
         return res.status(400).json({ success: false, message: "No order items" });
@@ -9,6 +9,8 @@ const placeOrder = async (req, res) => {
     const order = new Order({
         user: req.user._id,
         orderItems,
+        shippingAddress,      // NEW
+        paymentMethod,        // NEW
         totalPrice
     });
 
@@ -19,6 +21,7 @@ const placeOrder = async (req, res) => {
         res.status(500).json({ success: false, message: "Failed to create order" });
     }
 };
+
 
 const addItemsToCart = async (req, res) => {
     const { itemId } = req.body;
@@ -96,5 +99,17 @@ const unplacedOrdersForCurrentUser = async (req, res) => {
         res.status(500).json({ success: false, message: "Failed to fetch orders" });
     }
 }
+// Get all orders for the logged-in user
+const getUserOrders = async (req, res) => {
+    try {
+        // Populate medicine details inside orderItems
+        const orders = await Order.find({ user: req.user._id })
+            .populate('orderItems.product'); // Populate medicine details
+        res.json({ success: true, data: orders });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Failed to fetch orders" });
+    }
+};
 
-export { placeOrder, addItemsToCart, removeItemFromCart, unplacedOrdersForCurrentUser };
+
+export { placeOrder, addItemsToCart, removeItemFromCart, unplacedOrdersForCurrentUser,getUserOrders };

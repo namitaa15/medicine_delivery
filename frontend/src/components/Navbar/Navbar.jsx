@@ -60,9 +60,9 @@ const Navbar = ({ setShowLogin }) => {
         <Link to="/" onClick={() => setMenu('home')} className={menu === 'home' ? 'font-bold' : ''}>
           Dashboard
         </Link>
-        <Link to="/medicines" onClick={() => setMenu('medicines')} className={menu === 'medicines' ? 'font-bold' : ''}>
+         {/* { <Link to="/medicines" onClick={() => setMenu('medicines')} className={menu === 'medicines' ? 'font-bold' : ''}>
           Medicines
-        </Link>
+        </Link>  } */}
         <a href="#categories" onClick={() => setMenu('categories')} className={menu === 'categories' ? 'font-bold' : ''}>
           Categories
         </a>
