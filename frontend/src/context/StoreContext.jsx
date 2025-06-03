@@ -6,7 +6,7 @@ export const StoreContext = createContext({});
 
 const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:5002"; // Ensure backend is running on this port
+    const url = import.meta.env.VITE_BACKEND_URL; // Ensure backend is running on this port
     const [medicine_list, setMedicineList] = useState([]);
     const [token, setToken] = useState(localStorage.getItem("token"));
 
