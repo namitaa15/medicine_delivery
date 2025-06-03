@@ -4,7 +4,7 @@ A full-stack web application that allows users to browse, search, and order medi
 
 ## 🚀 Live Demo
 
-- **Frontend:** [your-frontend.vercel.app](https://your-frontend.vercel.app)
+- **Frontend:** [your-frontend.vercel.app](https://medicine-delivery-pi.vercel.app/)
 - **Backend API:** [medicine-delivery-bc3i.onrender.com](https://medicine-delivery-bc3i.onrender.com)
 
 ---
