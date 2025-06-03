@@ -2,15 +2,33 @@
 
 A full-stack web application that allows users to browse, search, and order medicines online with authentication, cart, order history, and review features.
 
+## 🚀 Live Demo
+
+- **Frontend:** [your-frontend.vercel.app](https://medicine-delivery-pi.vercel.app/)
+- **Backend API:** [medicine-delivery-bc3i.onrender.com](https://medicine-delivery-bc3i.onrender.com)
+
 ---
 
-## 🚀 Features
+## 🛠️ Tech Stack
 
-- User registration and login with JWT authentication
-- Search and category-based filtering for medicines
-- Add to cart and place orders with delivery tracking
-- Leave ratings and reviews on medicines
-- Manage cart and auth state using React Context API
+- **Frontend:** React.js (Vite)
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (Atlas)
+- **Authentication:** JWT (JSON Web Token)
+- **Deployment:** Vercel (frontend), Render (backend), MongoDB Atlas (cloud DB)
+
+---
+
+## ✨ Features
+
+- User Registration & Login (JWT authentication)
+- Browse all medicines, category-based filtering
+- Medicine details fetched from MongoDB (not hardcoded!)
+- Add/Remove medicines to/from cart
+- Place orders with shipping details & payment method
+- View past orders (order history)
+- Protected routes (only logged-in users can order/view orders)
+- Responsive and modern UI
 
 ---
 
